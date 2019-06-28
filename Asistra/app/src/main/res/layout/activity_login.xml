@@ -82,7 +82,7 @@
         android:layout_width="442dp"
         android:layout_height="124dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/holo_blue_dark"
+        android:background="#4799E8"
         android:text="INICIAR SESIÓN"
         android:textColor="@android:color/background_light"
         android:textSize="24sp"
@@ -98,11 +98,11 @@
         android:layout_width="81dp"
         android:layout_height="28dp"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="128dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="152dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/iniciar"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="@+id/iniciar"
-        android:layout_marginLeft="8dp" />
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="@+id/iniciar" />
 </android.support.constraint.ConstraintLayout>

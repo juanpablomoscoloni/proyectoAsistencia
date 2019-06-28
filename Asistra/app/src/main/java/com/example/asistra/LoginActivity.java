@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         //Empieza a girar la ruedita
         progreso.setVisibility(View.VISIBLE);
 
-        String urlConsulta = "http://192.168.43.218/proyectoAsistencia/comprobarUsuario.php";
+        String urlConsulta = "http://192.168.0.104/proyectoAsistencia/comprobarUsuario.php";
 
         RequestQueue requestQueue;
         requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -96,10 +96,11 @@ public class LoginActivity extends AppCompatActivity {
 
                         JSONObject user = jsonArray.getJSONObject(0); //Modificable
 
+                        //Compruebo si el usuario que se recuperó es de un docente
                         if (user.getString("rol").equals("alumno")) {
                             pasarActividadAlumno(user.getString("id"));
                         } else {
-
+                            pasarActividadDocente(user.getString("id"));
                         }
 
                     } else {
@@ -111,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Ocurrio un error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
                     progreso.setVisibility(View.GONE);
                     iniciar.setEnabled(true);
                 }
@@ -155,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void pasarActividadDocente (String id) {
 
-        Intent intent = new Intent(LoginActivity.this, TokenActivity.class);
+        Intent intent = new Intent(LoginActivity.this, DocenteActivity.class);
 
         intent.putExtra("id", id);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
