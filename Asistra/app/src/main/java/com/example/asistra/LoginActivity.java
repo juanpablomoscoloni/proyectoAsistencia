@@ -98,9 +98,9 @@ public class LoginActivity extends AppCompatActivity {
 
                         //Compruebo si el usuario que se recuperó es de un docente
                         if (user.getString("rol").equals("alumno")) {
-                            pasarActividadAlumno(user.getString("id"));
+                            pasarActividadAlumno(user.getString("idAlumno"));
                         } else {
-                            pasarActividadDocente(user.getString("id"));
+                            pasarActividadDocente(user.getString("idDocente"));
                         }
 
                     } else {

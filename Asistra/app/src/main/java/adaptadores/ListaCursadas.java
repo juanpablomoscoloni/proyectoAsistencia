@@ -1,4 +1,4 @@
-package com.example.asistra;
+package adaptadores;
 
 import android.content.Context;
 import android.view.LayoutInflater;
