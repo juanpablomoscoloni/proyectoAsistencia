@@ -20,6 +20,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
@@ -42,8 +45,16 @@ public class DocenteActivity extends AppCompatActivity {
     public String resultadoLogin;
 
     public Cursada cursada;
+    public Docente docente;
+    public Asignatura asignatura;
+    public Comision comision;
 
+    //Todas las listas
     public static ArrayList<Cursada> listaDeCursadas = new ArrayList<>();
+    public static ArrayList<Comision> listaDeComisiones = new ArrayList<>();
+    public static ArrayList<Asignatura> listaDeAsignaturas = new ArrayList<>();
+
+    //Lo necesario para mostrar las cursadas en pantalla
     public static ListView listasDeCursadaView;
     public static ListaCursadas adaptadorMaterias;
 
@@ -95,8 +106,6 @@ public class DocenteActivity extends AppCompatActivity {
         listasDeCursadaView = findViewById(R.id.listaDeAsistencia);
 
         listaDeCursadas.clear();
-        listaDeCursadas.add(cursada);
-
         //Inicializo al adaptador
         adaptadorMaterias = new ListaCursadas(listaDeCursadas, getApplicationContext());
         //Setteo el adapter en la listView
@@ -118,39 +127,6 @@ public class DocenteActivity extends AppCompatActivity {
 
         recuperarDocente();
 
-
-        //Este método es el que recibe los datos de la actividad AgregarLista, para poder añadir una nueva lista de asistencia
-   /* public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if(resultCode == RESULT_OK) {
-
-                //Si vuelve exitosamente de la actividad Agregar Lista, la instancio
-                listaDeMateriaAtrapada = new ListaAsistencia(
-                        data.getStringExtra("especialidad"),
-                        data.getStringExtra("asignatura"),
-                        data.getStringExtra("com"),
-                        data.getStringExtra("aula"),
-                        Calendar.getInstance().get(Calendar.YEAR),
-                        Integer.parseInt(data.getStringExtra("ausentes")));
-
-
-                //La agrego a las demás
-                listasDeAsistencia.add(listaDeMateriaAtrapada);
-
-                //Notifico al adpatador de que se modificó la lista
-                adaptadorMaterias.notifyDataSetChanged();
-
-                Toast.makeText(getApplicationContext(), "Lista de asistencia creada ",Toast.LENGTH_SHORT).show();
-
-                //Si creo una lista de asistencia nueva, entonces saco el mensaje para que se añadan
-                if (listasDeAsistencia.size() > 0 ){
-                    aunSinLista.setVisibility(View.GONE);
-
-                }
-            }
-        }*/
-
     }
 
     public void recuperarDocente(){
@@ -167,34 +143,9 @@ public class DocenteActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
-                try {
+                //Aca viene el armado de los objetos a partir del JSON
+                recuperarDatos(response);
 
-                    JSONObject jsonobject = new JSONObject(response);
-                    JSONArray jsonArray = jsonobject.getJSONArray("Docente"); //Modificable
-
-                    if (jsonArray.length() > 0) {
-
-                       JSONObject docente = jsonArray.getJSONObject(0); //Modificable
-
-                       //Acá recupero el docente
-                       nombreDocente.setText(docente.getString("nombre") + " " + docente.getString("apellido"));
-                       nombreDocente.setVisibility(View.VISIBLE);
-                       tituloDocente.setVisibility(View.VISIBLE);
-                       listasDeCursadaView.setVisibility(View.VISIBLE);
-
-
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "No se encontró", Toast.LENGTH_LONG).show();
-                    }
-
-                    progreso.setVisibility(View.GONE);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
-                    progreso.setVisibility(View.GONE);
-                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -217,6 +168,125 @@ public class DocenteActivity extends AppCompatActivity {
         };
 
         requestQueue.add(stringRequest);
+
+    }
+
+    public void recuperarDatos (String response) {
+
+        try {
+
+            Iterator iterator;
+            JSONObject jsonobject = new JSONObject(response);
+            JSONArray jsonArray = jsonobject.getJSONArray("Datos");
+            if (jsonArray.length() > 0) {
+
+                JSONObject datos =  jsonArray.getJSONObject(0);
+                JSONObject docentes = datos.getJSONObject("docente");
+                JSONObject cursadas = datos.getJSONObject("cursada");
+                JSONObject comisiones = datos.getJSONObject("comision");
+                JSONObject asignaturas = datos.getJSONObject("asignatura");
+
+                //Primero recupero el docente
+                iterator = docentes.keys();
+                while(iterator.hasNext()){
+
+                    String key = (String)iterator.next();
+                    JSONObject docenteObjeto = docentes.getJSONObject(key);
+
+                    docente = new Docente();
+                    docente.setId(docenteObjeto.optString("id"));
+                    docente.setNombre(docenteObjeto.optString("nombre"));
+                    docente.setApellido(docenteObjeto.optString("apellido"));
+                    docente.setLegajo(docenteObjeto.optString("legajo"));
+
+                    //Muestro el nombre en pantalla
+                    nombreDocente.setText(docente.getNombre() + " " + docente.getApellido());
+                    nombreDocente.setVisibility(View.VISIBLE);
+                    tituloDocente.setVisibility(View.VISIBLE);
+
+                }
+
+                //Ahora recupero las comisiones
+                iterator = comisiones.keys();
+                while(iterator.hasNext()){
+
+                    String key = (String)iterator.next();
+                    JSONObject comisionObjeto = comisiones.getJSONObject(key);
+
+                    comision = new Comision();
+                    comision.setId(comisionObjeto.optString("id"));
+                    comision.setCodigo(comisionObjeto.optString("codigo"));
+
+                    listaDeComisiones.add(comision);
+
+                }
+
+                //Ahora recupero las asignaturas
+                iterator = asignaturas.keys();
+                while(iterator.hasNext()){
+
+                    String key = (String)iterator.next();
+                    JSONObject asignaturaObjeto = asignaturas.getJSONObject(key);
+
+                    asignatura = new Asignatura();
+
+                    asignatura.setId(asignaturaObjeto.optString("id"));
+                    asignatura.setNombre(asignaturaObjeto.optString("nombre"));
+
+                    listaDeAsignaturas.add(asignatura);
+
+                }
+
+                //Ahora recupero las cursadas
+                iterator = cursadas.keys();
+                while(iterator.hasNext()){
+
+                    String key = (String)iterator.next();
+                    JSONObject cursadaObjeto = cursadas.getJSONObject(key);
+
+                    cursada = new Cursada();
+                    cursada.setId(cursadaObjeto.optString("id"));
+                    cursada.setFaltasMaximas(cursadaObjeto.optString("faltasMaximas"));
+                    cursada.setAnio(cursadaObjeto.optString("anio"));
+                    cursada.setDocente(docente);
+
+                    //Acá me fijo qué comision pertenece a esta cursada de todas las que se recuperó
+                    for (Comision c : listaDeComisiones) {
+
+                        if (c.getId().equals(cursadaObjeto.optString("idComision"))) {
+                            cursada.setComision(c);
+                        }
+
+                    }
+
+                    //Acá me fijo qué asignatura pertenece a esta cursada de todas las que se recuperó
+                    for (Asignatura a : listaDeAsignaturas) {
+
+                        if (a.getId().equals(cursadaObjeto.optString("idAsignatura"))) {
+                            cursada.setAsignatura(a);
+                        }
+
+                    }
+
+                    listaDeCursadas.add(cursada);
+
+                }
+
+                //Acá se refresca la lista de las cursadas
+                adaptadorMaterias.notifyDataSetChanged();
+                listasDeCursadaView.setVisibility(View.VISIBLE);
+
+            } else {
+                Toast.makeText(getApplicationContext(), "No se encontró", Toast.LENGTH_LONG).show();
+            }
+
+            progreso.setVisibility(View.GONE);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+            progreso.setVisibility(View.GONE);
+        }
 
     }
 
