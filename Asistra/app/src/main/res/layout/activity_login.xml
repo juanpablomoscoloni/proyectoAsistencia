@@ -6,14 +6,39 @@
     android:background="@android:color/white"
     tools:context=".LoginActivity">
 
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.0" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.75" />
+
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="229dp"
-        android:layout_height="233dp"
+        android:layout_width="243dp"
+        android:layout_height="127dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/splash" />
@@ -21,10 +46,9 @@
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/usuario"
         android:layout_width="198dp"
-        app:met_floatingLabel="highlight"
-        app:met_primaryColor="@color/celeste"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:gravity="start"
@@ -34,9 +58,11 @@
         android:textColor="@android:color/background_dark"
         android:textColorHint="@android:color/background_dark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.582"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:met_floatingLabel="highlight"
+        app:met_primaryColor="@color/celeste" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/pass"
@@ -82,8 +108,8 @@
     <Button
         android:id="@+id/iniciar"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="442dp"
-        android:layout_height="124dp"
+        android:layout_width="617dp"
+        android:layout_height="126dp"
         android:layout_marginTop="8dp"
         android:background="#4799E8"
         android:text="INICIAR SESIÓN"
@@ -91,8 +117,9 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/logo"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="@+id/logo"
-        app:layout_constraintTop_toBottomOf="@+id/pass"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:layout_constraintVertical_bias="1.0" />
 
     <ProgressBar
@@ -102,10 +129,11 @@
         android:layout_height="28dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginBottom="152dp"
+        android:layout_marginBottom="8dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="@+id/iniciar"
-        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="@+id/iniciar" />
+
 </android.support.constraint.ConstraintLayout>
