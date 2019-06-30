@@ -103,19 +103,15 @@ public class DocenteActivity extends AppCompatActivity {
         listasDeCursadaView.setAdapter(adaptadorMaterias);
 
 
-        //Toast.makeText(this, cursada.getMaximoFaltas(),Toast.LENGTH_SHORT).show();
-
         listasDeCursadaView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Toast.makeText(getApplicationContext(), "A generar token", Toast.LENGTH_SHORT).show();
-
-                /*Intent intent = new Intent(DocenteActivity.this, MostrarLista.class);
-                intent.putExtra("id",String.valueOf(listasDeAsistencia.get(i).getId()));
-                intent.putExtra("asignatura",listasDeAsistencia.get(i).getAsignatura().getNombre());
+                Intent intent = new Intent(DocenteActivity.this, CursadaActivity.class);
+                intent.putExtra("id",String.valueOf(listaDeCursadas.get(i).getId()));
+                intent.putExtra("asignatura",listaDeCursadas.get(i).getAsignatura().getNombre());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);*/
+                startActivity(intent);
 
             }
         });

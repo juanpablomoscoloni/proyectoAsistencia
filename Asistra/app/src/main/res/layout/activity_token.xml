@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".TokenActivity">
 
     <Button
-        android:id="@+id/comprobar"
+        android:id="@+id/comprobarBtn"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="383dp"
         android:layout_height="118dp"
@@ -24,12 +24,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pass"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:visibility="gone" />
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="292dp"
-        android:layout_height="114dp"
+        android:layout_height="84dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="168dp"
@@ -38,13 +39,13 @@
         android:background="@drawable/edit_text_style"
         android:ems="10"
         android:gravity="center"
-        android:hint="A54E"
+        android:hint="Ej. A54E"
         android:inputType="textPersonName"
+        android:longClickable="false"
         android:maxLength="4"
+        android:textAllCaps="true"
         android:textSize="36sp"
         android:textStyle="bold"
-        android:longClickable="false"
-        android:textAllCaps="true"
         android:typeface="sans"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,10 +55,11 @@
         android:id="@+id/introducirToken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Introducir el token"
-        android:textSize="18sp"
+        android:layout_marginBottom="24dp"
+        android:text="Introducir el token:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/editText"
         app:layout_constraintEnd_toEndOf="@+id/editText"
-        app:layout_constraintStart_toStartOf="@+id/editText"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintStart_toStartOf="@+id/editText" />
 </android.support.constraint.ConstraintLayout>
