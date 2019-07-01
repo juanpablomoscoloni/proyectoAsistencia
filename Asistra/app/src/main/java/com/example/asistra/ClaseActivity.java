@@ -221,8 +221,6 @@ public class ClaseActivity extends AppCompatActivity {
                 }
 
 
-                Toast.makeText(getApplicationContext(), Integer.toString(listaDeAsistencias.size()), Toast.LENGTH_LONG).show();
-
             } else {
                 Toast.makeText(getApplicationContext(), "No se encontró", Toast.LENGTH_LONG).show();
             }
@@ -244,12 +242,16 @@ public class ClaseActivity extends AppCompatActivity {
 
     public void siguienteActividad () {
 
-        Intent intent = new Intent(ClaseActivity.this,MostrarTokenActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("idDiaClase", idDiaClase);
-        intent.putExtra("token", token);
-        intent.putExtra("cantidadAlumnos", Integer.toString(listaDeAsistencias.size()));
-        startActivity(intent);
+        if (listaDeAsistencias.size()>0) {
+            Intent intent = new Intent(ClaseActivity.this, MostrarTokenActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("idDiaClase", idDiaClase);
+            intent.putExtra("token", token);
+            intent.putExtra("cantidadAlumnos", Integer.toString(listaDeAsistencias.size()));
+            startActivity(intent);
+        } else {
+            Toast.makeText(getApplicationContext(), "No hay alumnos", Toast.LENGTH_LONG).show();
+        }
 
     }
 

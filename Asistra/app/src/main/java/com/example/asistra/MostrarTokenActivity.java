@@ -212,8 +212,6 @@ public class MostrarTokenActivity extends AppCompatActivity {
                 }
 
 
-                Toast.makeText(getApplicationContext(), Integer.toString(listaDeAsistencias.size()), Toast.LENGTH_LONG).show();
-
             } else {
                 Toast.makeText(getApplicationContext(), "No se encontró", Toast.LENGTH_LONG).show();
             }
