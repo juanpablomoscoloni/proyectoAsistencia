@@ -2,6 +2,7 @@ package clases;
 
 public class Alumno {
 
+    private String id;
     private String nombre;
     private String apellido;
     private String legajo;
@@ -30,4 +31,11 @@ public class Alumno {
         this.legajo = legajo;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

@@ -117,8 +117,9 @@ public class DocenteActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent intent = new Intent(DocenteActivity.this, CursadaActivity.class);
-                intent.putExtra("id",String.valueOf(listaDeCursadas.get(i).getId()));
+                intent.putExtra("idCursada",String.valueOf(listaDeCursadas.get(i).getId()));
                 intent.putExtra("asignatura",listaDeCursadas.get(i).getAsignatura().getNombre());
+                intent.putExtra("idDocente",listaDeCursadas.get(i).getDocente().getId());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
