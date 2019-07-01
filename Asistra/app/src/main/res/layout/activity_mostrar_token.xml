@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/progresoRestantesId"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MostrarTokenActivity">
@@ -105,7 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/restantesId" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progresoRestantesId"
         style="?android:attr/progressBarStyle"
         android:layout_width="30dp"
         android:layout_height="35dp"

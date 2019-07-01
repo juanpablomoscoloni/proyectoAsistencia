@@ -43,6 +43,7 @@ import clases.Docente;
 public class DocenteActivity extends AppCompatActivity {
 
     public String resultadoLogin;
+    private String http = "http://192.168.0.104/proyectoAsistencia/recuperarDocente.php";
 
     public Cursada cursada;
     public Docente docente;
@@ -135,7 +136,7 @@ public class DocenteActivity extends AppCompatActivity {
         //Empieza a girar la ruedita
         progreso.setVisibility(View.VISIBLE);
 
-        String urlConsulta = "http://192.168.0.104/proyectoAsistencia/recuperarDocente.php";
+        String urlConsulta = http;
 
         RequestQueue requestQueue;
         requestQueue = Volley.newRequestQueue(getApplicationContext());

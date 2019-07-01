@@ -33,6 +33,8 @@ import clases.Inscripcion;
 
 public class ClaseActivity extends AppCompatActivity {
 
+    private String http = "http://192.168.0.104/proyectoAsistencia/crearClase.php";
+
     Button generarToken;
     TextView tema;
     String docenteID;
@@ -67,6 +69,7 @@ public class ClaseActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (tema.getText().length() > 0 ) {
+                    listaDeAsistencias.clear();
                     crearDiaClase(tema.getText().toString(),cursadaID, docenteID);
                 } else {
                     Toast.makeText(getApplicationContext(), "Ingrese un tema", Toast.LENGTH_SHORT).show();
@@ -81,7 +84,7 @@ public class ClaseActivity extends AppCompatActivity {
 
     public void crearDiaClase(final String tema, final String idCursada, final String idDocente){
 
-        String urlConsulta = "http://192.168.0.104/proyectoAsistencia/crearClase.php";
+        String urlConsulta = http;
 
         progressBar.setVisibility(View.VISIBLE);
         RequestQueue requestQueue;

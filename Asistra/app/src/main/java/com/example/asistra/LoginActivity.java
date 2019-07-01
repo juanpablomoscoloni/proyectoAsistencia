@@ -26,6 +26,8 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private String http = "http://192.168.0.104/proyectoAsistencia/comprobarUsuario.php";
+
     public EditText campoUsuario;
     public EditText campoContra;
     public ProgressBar progreso;
@@ -78,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         //Empieza a girar la ruedita
         progreso.setVisibility(View.VISIBLE);
 
-        String urlConsulta = "http://192.168.0.104/proyectoAsistencia/comprobarUsuario.php";
+        String urlConsulta = http;
 
         RequestQueue requestQueue;
         requestQueue = Volley.newRequestQueue(getApplicationContext());
