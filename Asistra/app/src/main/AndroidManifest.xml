@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ExitoActivity"></activity>
+        <activity android:name=".UltimosPresentesActivity"></activity>
+        <activity android:name=".ExitoActivity" />
         <activity android:name=".MostrarTokenActivity" />
         <activity android:name=".ClaseActivity" />
         <activity android:name=".CursadaActivity" />
