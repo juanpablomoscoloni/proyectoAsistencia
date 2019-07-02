@@ -1,6 +1,7 @@
 package com.example.asistra;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,7 +34,7 @@ import clases.Inscripcion;
 
 public class ClaseActivity extends AppCompatActivity {
 
-    private String http = "http://192.168.43.218/proyectoAsistencia/crearClase.php";
+    private String http;
 
     Button generarToken;
     TextView tema;
@@ -55,6 +56,8 @@ public class ClaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clase);
+
+        http = getApplicationContext().getResources().getString(R.string.ipServer) + "/proyectoAsistencia/crearClase.php";
 
         docenteID = getIntent().getExtras().getString("idDocente");
         cursadaID = getIntent().getExtras().getString("idCursada");

@@ -1,6 +1,8 @@
 package adaptadores;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
@@ -82,14 +84,14 @@ public class ListaAsistencia extends ArrayAdapter<Asistencia> implements View.On
          A partir de acá se hacen las modificaciones sino se renuevan los botones
 
          */
-
+        final GradientDrawable drawable = (GradientDrawable)viewHolder.preau.getBackground();
 
         if (Objects.requireNonNull(asistenciaDealumno).getEstado().equals("1")) {
             viewHolder.preau.setChecked(true);
-            //viewHolder.preau.setTextColor(ContextCompat.getColor(getContext(), R.color.celeste));
+            drawable.setStroke(3, ContextCompat.getColor(mContext, R.color.verde));
         } else {
             viewHolder.preau.setChecked(false);
-            viewHolder.preau.setTextColor(ContextCompat.getColor(getContext(), R.color.rojo));
+            drawable.setStroke(3, ContextCompat.getColor(mContext, R.color.rojo)); //
         }
 
 
@@ -104,9 +106,9 @@ public class ListaAsistencia extends ArrayAdapter<Asistencia> implements View.On
                 if (asistenciaDealumno.getEstado() =="0") {
                      viewHolder.preau.setText("Ausente");
                     asistenciaDealumno.setEstado("1");
-                    viewHolder.preau.setTextColor(ContextCompat.getColor(getContext(), R.color.rojo));
+                    drawable.setStroke(3, ContextCompat.getColor(mContext, R.color.rojo));
                 } else {
-                    //viewHolder.preau.setTextColor(ContextCompat.getColor(getContext(), R.color.celeste));
+                    drawable.setStroke(3, ContextCompat.getColor(mContext, R.color.verde));
                     asistenciaDealumno.setEstado("0");
                     viewHolder.preau.setText("Presente");
                 }

@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class ExitoActivity extends AppCompatActivity {
 
-    private String http = "http://192.168.43.218/proyectoAsistencia/cambiarAsistencia.php";
+    private String http;
 
     private TextView asignatura;
     private String idAsistencia;
@@ -38,6 +38,8 @@ public class ExitoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exito);
+
+        http = getApplicationContext().getResources().getString(R.string.ipServer) + "/proyectoAsistencia/cambiarAsistencia.php";
 
         idAsistencia = getIntent().getExtras().getString("id");
         nombreAsignatura = getIntent().getExtras().getString("asignatura");

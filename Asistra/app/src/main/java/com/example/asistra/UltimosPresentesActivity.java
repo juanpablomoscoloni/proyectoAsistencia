@@ -63,7 +63,7 @@ public class UltimosPresentesActivity extends AppCompatActivity {
     ArrayList<Alumno> listaDeAlumnos = new ArrayList<>();
 
 
-    private String http = "http://192.168.43.218/proyectoAsistencia/recuperarAsistencias.php";
+    private String http;
 
 
     @Override
@@ -73,7 +73,7 @@ public class UltimosPresentesActivity extends AppCompatActivity {
 
         idClase = getIntent().getExtras().getString("idDiaClase");
 
-
+        http = getApplicationContext().getResources().getString(R.string.ipServer) + "/proyectoAsistencia/recuperarAsistencias.php";
 
         //Atrapo el listview y el texto de hecho
         hecho = findViewById(R.id.validarBtn);

@@ -13,8 +13,8 @@
 
         <TextView
             android:id="@+id/nombre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="96dp"
+            android:layout_height="27dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:text="nombreAlumno"
@@ -36,8 +36,8 @@
 
         <TextView
             android:id="@+id/apellidoAlumnoDeLista"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="133dp"
+            android:layout_height="28dp"
             android:layout_alignTop="@+id/preau"
             android:layout_marginStart="12dp"
             android:layout_marginLeft="12dp"
@@ -53,17 +53,19 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:background="@drawable/shape"
             android:shadowColor="@android:color/background_dark"
             android:shadowRadius="0"
+            android:textColor="@android:color/background_light"
             android:textOff="AUSENTE"
             android:textOn="PRESENTE"
             android:theme="@android:style/Animation.Activity"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.631" />
 
     </android.support.constraint.ConstraintLayout>
 

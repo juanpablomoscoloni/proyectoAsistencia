@@ -1,6 +1,7 @@
 package com.example.asistra;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +27,7 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private String http = "http://192.168.43.218/proyectoAsistencia/comprobarUsuario.php";
+    private String http;
 
     public EditText campoUsuario;
     public EditText campoContra;
@@ -39,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        http = getApplicationContext().getResources().getString(R.string.ipServer) + "/proyectoAsistencia/comprobarUsuario.php";
 
         campoContra = findViewById(R.id.pass);
         campoUsuario = findViewById(R.id.usuario);
@@ -55,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+        Toast.makeText(getApplicationContext(), http, Toast.LENGTH_LONG).show();
 
     }
 

@@ -31,7 +31,7 @@ import java.util.Map;
 
 public class TokenActivity extends AppCompatActivity {
 
-    private String http = "http://192.168.43.218/proyectoAsistencia/comprobarToken.php";
+    private String http;
 
     private String idAsistencia;
     private String cantidadInasistencias;
@@ -46,6 +46,8 @@ public class TokenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_token);
+
+        http = getApplicationContext().getResources().getString(R.string.ipServer) + "/proyectoAsistencia/comprobarToken.php";
 
         campoToken = findViewById(R.id.editText);
         meterToken = findViewById(R.id.introducirToken);

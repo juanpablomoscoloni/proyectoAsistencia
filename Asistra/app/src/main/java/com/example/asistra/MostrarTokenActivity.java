@@ -37,7 +37,7 @@ import clases.Inscripcion;
 
 public class MostrarTokenActivity extends AppCompatActivity {
 
-    private String http = "http://192.168.43.218/proyectoAsistencia/recuperarAsistencias.php";
+    private String http;
 
     Button finalizar;
     TextView token;
@@ -61,6 +61,8 @@ public class MostrarTokenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostrar_token);
+
+        http = getApplicationContext().getResources().getString(R.string.ipServer) + "/proyectoAsistencia/recuperarAsistencias.php";
 
         token = findViewById(R.id.tokenMuestraId);
         restantes = findViewById(R.id.restantesId);

@@ -43,7 +43,7 @@ import clases.Docente;
 public class DocenteActivity extends AppCompatActivity {
 
     public String resultadoLogin;
-    private String http = "http://192.168.43.218/proyectoAsistencia/recuperarDocente.php";
+    private String http;
 
     public Cursada cursada;
     public Docente docente;
@@ -70,6 +70,8 @@ public class DocenteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_docente);
+
+        http = getApplicationContext().getResources().getString(R.string.ipServer) + "/proyectoAsistencia/recuperarDocente.php";
 
         //Acá recupero el id que me pasa el login
         resultadoLogin = Objects.requireNonNull(getIntent().getExtras()).getString("id");
