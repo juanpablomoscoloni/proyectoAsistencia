@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private String http = "http://192.168.0.104/proyectoAsistencia/comprobarUsuario.php";
+    private String http = "http://192.168.43.218/proyectoAsistencia/comprobarUsuario.php";
 
     public EditText campoUsuario;
     public EditText campoContra;
@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "No se encontró", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "El usuario y/o contraseña son incorrectos.", Toast.LENGTH_LONG).show();
                     }
 
                     progreso.setVisibility(View.GONE);

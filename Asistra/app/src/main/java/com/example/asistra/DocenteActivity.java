@@ -43,7 +43,7 @@ import clases.Docente;
 public class DocenteActivity extends AppCompatActivity {
 
     public String resultadoLogin;
-    private String http = "http://192.168.0.104/proyectoAsistencia/recuperarDocente.php";
+    private String http = "http://192.168.43.218/proyectoAsistencia/recuperarDocente.php";
 
     public Cursada cursada;
     public Docente docente;

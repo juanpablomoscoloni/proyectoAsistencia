@@ -15,7 +15,6 @@ buildscript {
 }
 
 allprojects {
-    buildDir = $/C:\wamp64\www\proyectoAsistencia/$
     repositories {
         google()
         jcenter()

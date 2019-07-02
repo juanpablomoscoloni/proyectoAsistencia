@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class ExitoActivity extends AppCompatActivity {
 
-    private String http = "http://192.168.0.104/proyectoAsistencia/cambiarAsistencia.php";
+    private String http = "http://192.168.43.218/proyectoAsistencia/cambiarAsistencia.php";
 
     private TextView asignatura;
     private String idAsistencia;

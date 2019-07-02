@@ -1,6 +1,7 @@
 package com.example.asistra;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.support.annotation.RequiresApi;
@@ -36,7 +37,7 @@ import clases.Inscripcion;
 
 public class MostrarTokenActivity extends AppCompatActivity {
 
-    private String http = "http://192.168.0.104/proyectoAsistencia/recuperarAsistencias.php";
+    private String http = "http://192.168.43.218/proyectoAsistencia/recuperarAsistencias.php";
 
     Button finalizar;
     TextView token;
@@ -78,7 +79,10 @@ public class MostrarTokenActivity extends AppCompatActivity {
 
                 //Se cancela el timer
                 cancelTimer();
-                //Se envía la señal para cambiar el estado de la clase
+                Intent intent = new Intent(MostrarTokenActivity.this,UltimosPresentesActivity.class);
+                intent.putExtra("idDiaClase",idDiaClase);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
 
             }
         });

@@ -31,7 +31,7 @@ import java.util.Map;
 
 public class TokenActivity extends AppCompatActivity {
 
-    private String http = "http://192.168.0.104/proyectoAsistencia/comprobarToken.php";
+    private String http = "http://192.168.43.218/proyectoAsistencia/comprobarToken.php";
 
     private String idAsistencia;
     private String cantidadInasistencias;

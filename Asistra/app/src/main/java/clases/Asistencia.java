@@ -10,6 +10,8 @@ public class Asistencia {
     private String apellidoAlumno;
     private String estado;
 
+
+
     public String getId() {
         return id;
     }

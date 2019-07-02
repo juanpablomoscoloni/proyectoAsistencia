@@ -14,21 +14,25 @@
 
         <TextView
             android:id="@+id/comLista"
-            android:layout_width="41dp"
-            android:layout_height="23dp"
+            android:layout_width="64dp"
+            android:layout_height="26dp"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:text="COM"
             android:textColor="@color/celeste"
             android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/asignaturaNombre"
-            android:layout_width="276dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_width="280dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="8dp"
             android:text="Asignatura"
@@ -36,24 +40,26 @@
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/fechaClase"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.529" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/fechaClase"
-            android:layout_width="46dp"
-            android:layout_height="39dp"
+            android:layout_width="72dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:text="S12"
             android:textColor="@color/celeste"
             android:textSize="24sp"
             android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="@+id/comLista"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/comLista"
             app:layout_constraintTop_toBottomOf="@+id/comLista" />
 
-         <TextView
+        <TextView
             android:id="@+id/agregarAlumno"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,9 +76,9 @@
             android:id="@+id/verAlumnos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="72dp"
+            android:layout_marginEnd="8dp"
             android:text="VER ALUMNOS"
             android:textColor="@color/celeste"
             android:textSize="18sp"
@@ -81,6 +87,14 @@
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.2"/>
 
     </android.support.constraint.ConstraintLayout>
 </RelativeLayout>
