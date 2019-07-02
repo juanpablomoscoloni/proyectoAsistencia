@@ -81,7 +81,7 @@ public class MostrarTokenActivity extends AppCompatActivity {
 
                 //Se cancela el timer
                 cancelTimer();
-                Intent intent = new Intent(MostrarTokenActivity.this,UltimosPresentesActivity.class);
+                Intent intent = new Intent(MostrarTokenActivity.this, ValidarActivity.class);
                 intent.putExtra("idDiaClase",idDiaClase);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

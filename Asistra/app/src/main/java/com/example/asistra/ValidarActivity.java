@@ -35,7 +35,7 @@ import clases.Alumno;
 import clases.Asistencia;
 import clases.Inscripcion;
 
-public class UltimosPresentesActivity extends AppCompatActivity {
+public class ValidarActivity extends AppCompatActivity {
 
     public static ListView listView;
     public static ListaAsistencia adapter;
