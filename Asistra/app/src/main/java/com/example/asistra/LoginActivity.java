@@ -25,6 +25,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import maes.tech.intentanim.CustomIntent;
+
 public class LoginActivity extends AppCompatActivity {
 
     private String http;
@@ -167,8 +169,16 @@ public class LoginActivity extends AppCompatActivity {
 
         intent.putExtra("id", id);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
         startActivity(intent);
+        CustomIntent.customType(this,"left-to-right");
+
+        /* Tipos de animaciones
+        * *left-to-right
+          *right-to-left
+          *bottom-to-up
+          *up-to-bottom
+          *fadein-to-fadeout
+           *rotateout-to-rotatein*/
 
     }
 }

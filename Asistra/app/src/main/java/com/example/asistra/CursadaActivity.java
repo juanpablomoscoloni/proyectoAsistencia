@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.Objects;
 
 import clases.Cursada;
+import maes.tech.intentanim.CustomIntent;
 
 public class CursadaActivity extends AppCompatActivity {
 
@@ -38,6 +39,15 @@ public class CursadaActivity extends AppCompatActivity {
                 intent.putExtra("idCursada", Objects.requireNonNull(getIntent().getExtras()).getString("idCursada"));
                 intent.putExtra("idDocente",getIntent().getExtras().getString("idDocente"));
                 startActivity(intent);
+                CustomIntent.customType(CursadaActivity.this,"left-to-right");
+
+                /* Tipos de animaciones
+                 * *left-to-right
+                 *right-to-left
+                 *bottom-to-up
+                 *up-to-bottom
+                 *fadein-to-fadeout
+                 *rotateout-to-rotatein*/
 
             }
         });

@@ -34,6 +34,7 @@ import java.util.Objects;
 import clases.Alumno;
 import clases.Asistencia;
 import clases.Inscripcion;
+import maes.tech.intentanim.CustomIntent;
 
 public class MostrarTokenActivity extends AppCompatActivity {
 
@@ -85,6 +86,15 @@ public class MostrarTokenActivity extends AppCompatActivity {
                 intent.putExtra("idDiaClase",idDiaClase);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                CustomIntent.customType(MostrarTokenActivity.this,"left-to-right");
+
+                /* Tipos de animaciones
+                 * *left-to-right
+                 *right-to-left
+                 *bottom-to-up
+                 *up-to-bottom
+                 *fadein-to-fadeout
+                 *rotateout-to-rotatein*/
 
             }
         });

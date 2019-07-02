@@ -31,6 +31,7 @@ import java.util.Objects;
 import clases.Alumno;
 import clases.Asistencia;
 import clases.Inscripcion;
+import maes.tech.intentanim.CustomIntent;
 
 public class ClaseActivity extends AppCompatActivity {
 
@@ -252,6 +253,15 @@ public class ClaseActivity extends AppCompatActivity {
             intent.putExtra("token", token);
             intent.putExtra("cantidadAlumnos", Integer.toString(listaDeAsistencias.size()));
             startActivity(intent);
+            CustomIntent.customType(ClaseActivity.this,"left-to-right");
+
+            /* Tipos de animaciones
+             * *left-to-right
+             *right-to-left
+             *bottom-to-up
+             *up-to-bottom
+             *fadein-to-fadeout
+             *rotateout-to-rotatein*/
         } else {
             Toast.makeText(getApplicationContext(), "No hay alumnos", Toast.LENGTH_LONG).show();
         }

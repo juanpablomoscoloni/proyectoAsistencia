@@ -1,6 +1,7 @@
 package com.example.asistra;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -38,6 +39,7 @@ import clases.Asignatura;
 import clases.Comision;
 import clases.Cursada;
 import clases.Docente;
+import maes.tech.intentanim.CustomIntent;
 
 
 public class DocenteActivity extends AppCompatActivity {
@@ -114,17 +116,11 @@ public class DocenteActivity extends AppCompatActivity {
         //Setteo el adapter en la listView
         listasDeCursadaView.setAdapter(adaptadorMaterias);
 
-
         listasDeCursadaView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Intent intent = new Intent(DocenteActivity.this, CursadaActivity.class);
-                intent.putExtra("idCursada",String.valueOf(listaDeCursadas.get(i).getId()));
-                intent.putExtra("asignatura",listaDeCursadas.get(i).getAsignatura().getNombre());
-                intent.putExtra("idDocente",listaDeCursadas.get(i).getDocente().getId());
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                pasarDeActividad(i);
 
             }
         });
@@ -292,6 +288,25 @@ public class DocenteActivity extends AppCompatActivity {
             progreso.setVisibility(View.GONE);
         }
 
+    }
+
+    public void pasarDeActividad (int i) {
+
+        Intent intent = new Intent(DocenteActivity.this, CursadaActivity.class);
+        intent.putExtra("idCursada",String.valueOf(listaDeCursadas.get(i).getId()));
+        intent.putExtra("asignatura",listaDeCursadas.get(i).getAsignatura().getNombre());
+        intent.putExtra("idDocente",listaDeCursadas.get(i).getDocente().getId());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        CustomIntent.customType(DocenteActivity.this,"left-to-right");
+
+        /* Tipos de animaciones
+         * *left-to-right
+         *right-to-left
+         *bottom-to-up
+         *up-to-bottom
+         *fadein-to-fadeout
+         *rotateout-to-rotatein*/
     }
 
 
