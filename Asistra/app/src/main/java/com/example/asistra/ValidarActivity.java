@@ -43,7 +43,8 @@ public class ValidarActivity extends AppCompatActivity {
     public static ListaAsistencia adapter;
     public Asistencia asistencia;
     public AsistenciaJSON asistenciaJSON;
-    public static ArrayList<Asistencia> asistenciasDeAlumnos = new ArrayList<>();
+    public static ArrayList<Asistencia> asistenciasDeAlumnosFinal = new ArrayList<>();
+    public static ArrayList<Asistencia> asistenciasDeAlumnosInicial = new ArrayList<>();
     public static ArrayList<AsistenciaJSON> asistenciasJSON = new ArrayList<>();
 
     public String idClase;
@@ -79,15 +80,16 @@ public class ValidarActivity extends AppCompatActivity {
         refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                asistenciasDeAlumnos.clear();
+                asistenciasDeAlumnosFinal.clear();
                 recuperarAsistencias(idClase);
             }
         });
 
-        asistenciasDeAlumnos.clear();
+        asistenciasDeAlumnosInicial.clear();
+        asistenciasDeAlumnosFinal.clear();
         recuperarAsistencias(idClase);
 
-        adapter = new ListaAsistencia(asistenciasDeAlumnos,getApplicationContext());
+        adapter = new ListaAsistencia(asistenciasDeAlumnosFinal,getApplicationContext());
         listView.setAdapter(adapter);
 
         validar.setOnClickListener(new View.OnClickListener() {
@@ -225,11 +227,12 @@ public class ValidarActivity extends AppCompatActivity {
 
                     }
 
-                    asistenciasDeAlumnos.add(asistencia);
+                    asistenciasDeAlumnosFinal.add(asistencia);
 
                 }
 
-                Collections.sort(asistenciasDeAlumnos, new Comparator<Asistencia>() {
+                //Acá ordeno de ausentes a presentes
+                Collections.sort(asistenciasDeAlumnosFinal, new Comparator<Asistencia>() {
                     @Override
                     public int compare(Asistencia a, Asistencia a1) {
                         String s1 = a.getEstado();
@@ -239,6 +242,15 @@ public class ValidarActivity extends AppCompatActivity {
 
                 });
 
+                //Acá genero la copia
+                for (Asistencia a: asistenciasDeAlumnosFinal) {
+                    asistencia = new Asistencia();
+                    asistencia.setId(a.getId());
+                    asistencia.setEstado(a.getEstado());
+                    asistenciasDeAlumnosInicial.add(asistencia);
+                }
+
+                //Acá notifico al adaptador de la lista que se cargaron todas las asistencias
                 adapter.notifyDataSetChanged();
 
 
@@ -263,14 +275,22 @@ public class ValidarActivity extends AppCompatActivity {
     */
         asistenciasJSON.clear();
 
-        for (Asistencia a : asistenciasDeAlumnos) {
+        for (int i = 0; i < asistenciasDeAlumnosFinal.size() ; i++) {
 
             asistenciaJSON = new AsistenciaJSON();
-            asistenciaJSON.setId(a.getId());
-            asistenciaJSON.setIdClase(a.getIdDiaClase());
-            asistenciaJSON.setIdInscripcion(a.getIdInscripcion());
 
-            asistenciasJSON.add(asistenciaJSON);
+            //Acá voy comparando si cambió el estado con respecto a la lista inicial
+            if (!asistenciasDeAlumnosInicial.get(i).getEstado().equals(asistenciasDeAlumnosFinal.get(i).getEstado())) {
+
+                //Si cambió lo voy agregando a la lista de los JSON
+                asistenciaJSON.setId(asistenciasDeAlumnosFinal.get(i).getId());
+
+                asistenciasJSON.add(asistenciaJSON);
+
+
+            }
+
+
 
         }
 

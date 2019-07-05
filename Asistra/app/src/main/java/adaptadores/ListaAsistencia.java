@@ -103,13 +103,13 @@ public class ListaAsistencia extends ArrayAdapter<Asistencia> implements View.On
             @Override
             public void onClick(View view) {
 
-                if (asistenciaDealumno.getEstado() =="0") {
+                if (asistenciaDealumno.getEstado() =="1") {
                      viewHolder.preau.setText("Ausente");
-                    asistenciaDealumno.setEstado("1");
+                    asistenciaDealumno.setEstado("0");
                     drawable.setStroke(3, ContextCompat.getColor(mContext, R.color.rojo));
                 } else {
                     drawable.setStroke(3, ContextCompat.getColor(mContext, R.color.verde));
-                    asistenciaDealumno.setEstado("0");
+                    asistenciaDealumno.setEstado("1");
                     viewHolder.preau.setText("Presente");
                 }
 
