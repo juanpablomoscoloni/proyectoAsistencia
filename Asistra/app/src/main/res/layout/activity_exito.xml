@@ -12,7 +12,7 @@
         android:layout_width="361dp"
         android:layout_height="105dp"
         android:layout_marginTop="8dp"
-        android:background="#4799E8"
+        android:background="@color/celeste"
         android:text="LISTO"
         android:textColor="@android:color/background_light"
         android:textSize="24sp"

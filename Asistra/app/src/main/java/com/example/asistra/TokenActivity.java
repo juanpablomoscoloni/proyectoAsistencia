@@ -1,6 +1,8 @@
 package com.example.asistra;
 
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -28,10 +30,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 
 public class TokenActivity extends AppCompatActivity {
 
     private String http;
+    private String token;
+    private String idAlumno;
 
     private String idAsistencia;
     private String cantidadInasistencias;
@@ -51,10 +56,11 @@ public class TokenActivity extends AppCompatActivity {
 
         campoToken = findViewById(R.id.editText);
         meterToken = findViewById(R.id.introducirToken);
-        //campoToken.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
 
         comprobarBtn = findViewById(R.id.comprobarBtn);
         progressBar = findViewById(R.id.progresoComprobarTokenBtn);
+
+        comprobarBtn.setVisibility(View.INVISIBLE);
 
         TextWatcher mTextEditorWatcher = new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -87,9 +93,12 @@ public class TokenActivity extends AppCompatActivity {
         campoToken.addTextChangedListener(mTextEditorWatcher);
 
         comprobarBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                comprobarToken(getIntent().getExtras().getString("id"),"a123");
+                token = campoToken.getText().toString().toUpperCase();
+                idAlumno = Objects.requireNonNull(getIntent().getExtras()).getString("id");
+                comprobarToken(idAlumno,token);
             }
         });
 

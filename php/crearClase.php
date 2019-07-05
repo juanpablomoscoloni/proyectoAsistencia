@@ -5,7 +5,7 @@ R::setup( 'mysql:host=localhost;dbname=asistencia', 'root', '' );
 $IDCURSADA = $_POST['idCursada'];
 $IDDOCENTE = $_POST['idDocente'];
 $TEMA = $_POST['tema'];
-$TOKEN = 'a123';
+$TOKEN = $_POST['tkn'];
 
 $inscriptos = R::find('inscripcion', ' idCursada = ? ', [$IDCURSADA]);
 

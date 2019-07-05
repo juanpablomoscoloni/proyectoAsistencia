@@ -1,12 +1,12 @@
 package com.example.asistra;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.content.ClipData;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,37 +25,33 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Objects;
 
 import adaptadores.ListaAsistencia;
 import clases.Alumno;
 import clases.Asistencia;
+import clases.AsistenciaJSON;
 import clases.Inscripcion;
 
 public class ValidarActivity extends AppCompatActivity {
 
     public static ListView listView;
     public static ListaAsistencia adapter;
-    public static ArrayList<Asistencia> asistenciasDeAlumnos = new ArrayList<>();
     public Asistencia asistencia;
-    public String idCursada;
+    public AsistenciaJSON asistenciaJSON;
+    public static ArrayList<Asistencia> asistenciasDeAlumnos = new ArrayList<>();
+    public static ArrayList<AsistenciaJSON> asistenciasJSON = new ArrayList<>();
+
     public String idClase;
-    public String idUsuario;
-    public String tema;
-    public String fecha;
     SwipeRefreshLayout refresh;
 
-    int presentes=0;
-    int ausentes=0;
-
-    ArrayList<Asistencia> asistencias = new ArrayList<>();
-
     Gson gson;
-    String asistenciasString;
-    TextView hecho;
+    String asistenciasConvertidas;
+    Button validar;
 
     Alumno alumno;
     Inscripcion inscripcion;
@@ -69,44 +65,38 @@ public class ValidarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ultimos_presentes);
+        setContentView(R.layout.activity_validar);
 
         idClase = getIntent().getExtras().getString("idDiaClase");
 
         http = getApplicationContext().getResources().getString(R.string.ipServer) + "/proyectoAsistencia/recuperarAsistencias.php";
 
         //Atrapo el listview y el texto de hecho
-        hecho = findViewById(R.id.validarBtn);
+        validar = findViewById(R.id.validarBtn);
         listView=findViewById(R.id.listaAlumnos);
         refresh = findViewById(R.id.refrescarAsistencias);
 
         refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                asistenciasDeAlumnos.clear();
+                recuperarAsistencias(idClase);
             }
         });
 
+        asistenciasDeAlumnos.clear();
         recuperarAsistencias(idClase);
 
         adapter = new ListaAsistencia(asistenciasDeAlumnos,getApplicationContext());
-
         listView.setAdapter(adapter);
 
-
-
-       /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                            @Override
-                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                                                AsistenciaAlumno asistenciaDeAlumno = asistenciasDeAlumnos.get(position);
-                                            }
-                                        });*/
-
-
-        hecho.setOnClickListener(new View.OnClickListener() {
+        validar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                convertirAsistencias();
+                gson = new Gson();
+                asistenciasConvertidas = gson.toJson(asistenciasJSON);
+                Toast.makeText(getApplicationContext(), asistenciasConvertidas, Toast.LENGTH_LONG).show();
 
             }
 
@@ -129,14 +119,14 @@ public class ValidarActivity extends AppCompatActivity {
             public void onResponse(String response) {
 
                 recuperarDatos(response);
-
+                refresh.setRefreshing(false);
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), "Sin conexion", Toast.LENGTH_LONG).show();
-
+                refresh.setRefreshing(false);
             }
         }
         ) {
@@ -239,6 +229,16 @@ public class ValidarActivity extends AppCompatActivity {
 
                 }
 
+                Collections.sort(asistenciasDeAlumnos, new Comparator<Asistencia>() {
+                    @Override
+                    public int compare(Asistencia a, Asistencia a1) {
+                        String s1 = a.getEstado();
+                        String s2 = a1.getEstado();
+                        return s1.compareToIgnoreCase(s2);
+                    }
+
+                });
+
                 adapter.notifyDataSetChanged();
 
 
@@ -255,5 +255,25 @@ public class ValidarActivity extends AppCompatActivity {
 
     }
 
+    public void convertirAsistencias () {
+    /*
+     * Este método crea asistencias para enviar como JSON porque la clase asistencia comun
+     * tiene campos de más que están al pedo para mandarlos como json.
+     * Entonces creé esta clase asistencia que tiene los campos justos y necesarios.
+    */
+        asistenciasJSON.clear();
+
+        for (Asistencia a : asistenciasDeAlumnos) {
+
+            asistenciaJSON = new AsistenciaJSON();
+            asistenciaJSON.setId(a.getId());
+            asistenciaJSON.setIdClase(a.getIdDiaClase());
+            asistenciaJSON.setIdInscripcion(a.getIdInscripcion());
+
+            asistenciasJSON.add(asistenciaJSON);
+
+        }
+
+    }
 
 }

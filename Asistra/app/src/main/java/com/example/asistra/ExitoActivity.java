@@ -3,6 +3,7 @@ package com.example.asistra;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ public class ExitoActivity extends AppCompatActivity {
     private TextView titulo;
 
     private ProgressBar progressBar;
+    private Button listo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,18 @@ public class ExitoActivity extends AppCompatActivity {
         asignatura = findViewById(R.id.materiaPresente);
         progressBar = findViewById(R.id.progresoExito);
         titulo = findViewById(R.id.tituloMateriaPresente);
+        listo = findViewById(R.id.listoAlumnoBtn);
 
         ponerPresente();
+
+        listo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+
+            }
+        });
 
 
     }
@@ -79,7 +91,7 @@ public class ExitoActivity extends AppCompatActivity {
 
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "No se encontró", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "No estás presente", Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
                     }
 

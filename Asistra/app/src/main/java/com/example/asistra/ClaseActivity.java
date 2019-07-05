@@ -31,6 +31,7 @@ import java.util.Objects;
 import clases.Alumno;
 import clases.Asistencia;
 import clases.Inscripcion;
+import clases.TokenGenerator;
 import maes.tech.intentanim.CustomIntent;
 
 public class ClaseActivity extends AppCompatActivity {
@@ -74,6 +75,7 @@ public class ClaseActivity extends AppCompatActivity {
 
                 if (tema.getText().length() > 0 ) {
                     listaDeAsistencias.clear();
+                    generarToken();
                     crearDiaClase(tema.getText().toString(),cursadaID, docenteID);
                 } else {
                     Toast.makeText(getApplicationContext(), "Ingrese un tema", Toast.LENGTH_SHORT).show();
@@ -101,7 +103,6 @@ public class ClaseActivity extends AppCompatActivity {
                 recuperarDatos(response);
                 progressBar.setVisibility(View.GONE);
 
-                generarToken();
                 siguienteActividad();
             }
         }, new Response.ErrorListener() {
@@ -119,6 +120,7 @@ public class ClaseActivity extends AppCompatActivity {
                 parametros.put("idDocente", idDocente);
                 parametros.put("idCursada", idCursada);
                 parametros.put("tema", tema);
+                parametros.put("tkn", token);
 
                 return parametros;
 
@@ -238,10 +240,10 @@ public class ClaseActivity extends AppCompatActivity {
 
     }
 
-
     public void generarToken () {
         //Acá se generará aleatoriamente un token
-        token = "A567";
+        TokenGenerator tokenGenerator = new TokenGenerator();
+        token = tokenGenerator.randomToken(4);
     }
 
     public void siguienteActividad () {
