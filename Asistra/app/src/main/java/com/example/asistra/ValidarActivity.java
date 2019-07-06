@@ -81,6 +81,7 @@ public class ValidarActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 asistenciasDeAlumnosFinal.clear();
+                asistenciasDeAlumnosInicial.clear();
                 recuperarAsistencias(idClase);
             }
         });

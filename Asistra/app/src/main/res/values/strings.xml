@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Asistra</string>
-    <string name="ipServer">http://192.168.0.104</string>
+    <string name="ipServer">http://192.168.0.107:8080</string>
 </resources>
