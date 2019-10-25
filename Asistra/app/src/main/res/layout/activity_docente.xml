@@ -8,21 +8,16 @@
     tools:context=".DocenteActivity">
 
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/listaDeAsistencia"
-        android:layout_width="374dp"
-        android:layout_height="469dp"
-        android:layout_marginTop="8dp"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="2dp"
-        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombreDocente"
-        app:layout_constraintVertical_bias="1.0">
-
-    </ListView>
+        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="gone" />
 
     <TextView
         android:id="@+id/tituloDocente"
@@ -69,6 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.337" />
+        app:layout_constraintVertical_bias="0.337"
+        tools:visibility="visible" />
 
 </android.support.constraint.ConstraintLayout>

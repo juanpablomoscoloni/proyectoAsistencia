@@ -1,10 +1,11 @@
 package adaptadores;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.asistra.R;
@@ -13,59 +14,52 @@ import java.util.ArrayList;
 
 import clases.Cursada;
 
-public class ListaCursadas extends ArrayAdapter implements View.OnClickListener {
+public class ListaCursadas extends RecyclerView.Adapter<ListaCursadas.MyViewHolder> {
 
     private ArrayList<Cursada> dataSet;
-    Context mContext;
+    private Context mContext;
 
-    // View lookup cache
-    private static class ViewHolder {
-        TextView txtAsignatura;
-        TextView txtComision;
-    }
-
-    public ListaCursadas(ArrayList<Cursada> listas, Context context) {
-        super(context, R.layout.fila_cursada, listas);
+    public ListaCursadas (Context context, ArrayList<Cursada> listas ) {
         this.dataSet = listas;
         this.mContext=context;
     }
 
     @Override
-    public void onClick(View view) {
-        // Para atrapar algún botón, etc
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        View view ;
+        LayoutInflater mInflater = LayoutInflater.from(mContext);
+        view = mInflater.inflate(R.layout.cardview_cursada,parent,false);
+        return new MyViewHolder(view);
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
-        final Cursada listaAsistencia = (Cursada) getItem(position);
-        // Check if an existing view is being reused, otherwise inflate the view
-        final ViewHolder viewHolder; // view lookup cache stored in tag
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        final View result;
+        holder.txtAsignatura.setText(dataSet.get(position).getAsignatura().getNombre());
+        holder.txtComision.setText(dataSet.get(position).getComision().getCodigo());
 
-        if (convertView == null) {
+    }
 
-            viewHolder = new ViewHolder();
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.fila_cursada, parent, false);
-            viewHolder.txtAsignatura = (TextView) convertView.findViewById(R.id.asignaturaNombre);
-            viewHolder.txtComision = (TextView) convertView.findViewById(R.id.fechaClase);
+    @Override
+    public int getItemCount() {
+        return dataSet.size();
+    }
 
-            result=convertView;
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-            result=convertView;
+        TextView txtAsignatura;
+        TextView txtComision;
+        CardView cardView ;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+
+            txtAsignatura = itemView.findViewById(R.id.asignaturaNombre) ;
+            txtComision = itemView.findViewById(R.id.fechaClase) ;
+            cardView = itemView.findViewById(R.id.cardview_id);
+
         }
-
-
-        viewHolder.txtAsignatura.setText(listaAsistencia.getAsignatura().getNombre().toUpperCase());
-        viewHolder.txtComision.setText(listaAsistencia.getComision().getCodigo().toUpperCase());
-
-        // Retorna la vista completa para renderizarla en pantalla
-        return convertView;
     }
 
 }

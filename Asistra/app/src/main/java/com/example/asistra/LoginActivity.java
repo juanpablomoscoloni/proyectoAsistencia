@@ -60,9 +60,6 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
-        Toast.makeText(getApplicationContext(), http, Toast.LENGTH_LONG).show();
-
     }
 
     public Boolean comprobarCampos () {
@@ -98,18 +95,17 @@ public class LoginActivity extends AppCompatActivity {
 
                 try {
 
-                    JSONObject jsonobject = new JSONObject(response);
-                    JSONArray jsonArray = jsonobject.getJSONArray("Usuario"); //Modificable
+                    JSONObject usuario = new JSONObject(response);
 
-                    if (jsonArray.length() > 0) {
+                    if (usuario.length() > 0) {
 
-                        JSONObject user = jsonArray.getJSONObject(0); //Modificable
+                        //JSONObject user = jsonArray.getJSONObject(0); //Modificable
 
                         //Compruebo si el usuario que se recuperó es de un docente
-                        if (user.getString("rol").equals("alumno")) {
-                            pasarActividadAlumno(user.getString("idAlumno"));
+                        if (usuario.getString("rol").equals("alumno")) {
+                            pasarActividadAlumno(usuario.getString("idAlumno"));
                         } else {
-                            pasarActividadDocente(user.getString("idDocente"));
+                            pasarActividadDocente(usuario.getString("idDocente"));
                         }
 
                     } else {

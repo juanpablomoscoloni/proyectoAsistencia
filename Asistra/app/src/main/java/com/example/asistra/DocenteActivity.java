@@ -7,12 +7,15 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -58,7 +61,7 @@ public class DocenteActivity extends AppCompatActivity {
     public static ArrayList<Asignatura> listaDeAsignaturas = new ArrayList<>();
 
     //Lo necesario para mostrar las cursadas en pantalla
-    public static ListView listasDeCursadaView;
+    public static RecyclerView listasDeCursadaView;
     public static ListaCursadas adaptadorMaterias;
 
     ProgressBar progreso;
@@ -107,9 +110,14 @@ public class DocenteActivity extends AppCompatActivity {
         cursada.setDocente(docente);
 
 
+        listasDeCursadaView = findViewById(R.id.listaDeAsistencia);
+        adaptadorMaterias = new ListaCursadas(getApplicationContext(),listaDeCursadas);
+        listasDeCursadaView.setLayoutManager(new GridLayoutManager(this,1));
+
+        listasDeCursadaView.setAdapter(adaptadorMaterias);
+        /*
         //Inicializo el visualizador de la lista de asistencias en pantalla
         listasDeCursadaView = findViewById(R.id.listaDeAsistencia);
-
         listaDeCursadas.clear();
         //Inicializo al adaptador
         adaptadorMaterias = new ListaCursadas(listaDeCursadas, getApplicationContext());
@@ -124,6 +132,7 @@ public class DocenteActivity extends AppCompatActivity {
 
             }
         });
+        */
 
         recuperarDocente();
 
