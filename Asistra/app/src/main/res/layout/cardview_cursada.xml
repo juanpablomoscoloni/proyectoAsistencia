@@ -21,6 +21,8 @@
             android:id="@+id/comLista"
             android:layout_width="64dp"
             android:layout_height="26dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
             android:text="COM"
             android:textColor="@color/celeste"
             android:textSize="18sp"
@@ -77,14 +79,14 @@
 
         <TextView
             android:id="@+id/asignaturaNombre"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
+            android:layout_gravity="center_vertical|end"
             android:layout_marginTop="20dp"
             android:text="Asignatura"
             android:textColor="#000000"
             app:textAllCaps="true"
+            cardview:layout_constraintEnd_toEndOf="parent"
             cardview:layout_constraintStart_toEndOf="@+id/fechaClase"
             cardview:layout_constraintTop_toTopOf="parent" />
 
