@@ -30,7 +30,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
-import adaptadores.AdaptadorCursadaActivity;
+import adaptadores.AdaptadorDocenteActivity;
 import clases.Asignatura;
 import clases.Comision;
 import clases.Cursada;
@@ -54,7 +54,7 @@ public class DocenteActivity extends AppCompatActivity {
 
     //Lo necesario para mostrar las cursadas en pantalla
     public static RecyclerView listasDeCursadaView;
-    public static AdaptadorCursadaActivity adaptadorMaterias;
+    public static AdaptadorDocenteActivity adaptadorMaterias;
 
     ProgressBar progreso;
     TextView tituloDocente;
@@ -102,8 +102,8 @@ public class DocenteActivity extends AppCompatActivity {
         cursada.setDocente(docente);
 
 
-        listasDeCursadaView = findViewById(R.id.listaDeAsistencia);
-        adaptadorMaterias = new AdaptadorCursadaActivity(this,listaDeCursadas);
+        listasDeCursadaView = findViewById(R.id.listaDeCursadas);
+        adaptadorMaterias = new AdaptadorDocenteActivity(this,listaDeCursadas);
         listasDeCursadaView.setLayoutManager(new GridLayoutManager(this,1));
         listasDeCursadaView.setAdapter(adaptadorMaterias);
 

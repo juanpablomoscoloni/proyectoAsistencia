@@ -9,7 +9,7 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/listaDeAsistencia"
+        android:id="@+id/listaDeCursadas"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="15dp"

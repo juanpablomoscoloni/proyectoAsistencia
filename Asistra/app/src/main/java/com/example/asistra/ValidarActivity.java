@@ -1,12 +1,12 @@
 package com.example.asistra;
 
 import android.annotation.SuppressLint;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -37,8 +37,8 @@ import clases.Inscripcion;
 
 public class ValidarActivity extends AppCompatActivity {
 
-    public static ListView listView;
-    public static AdaptadorValidarActivity adapter;
+    public static RecyclerView listaDeAsistenciasView;
+    public static AdaptadorValidarActivity adaptadorAsistencias;
     public Asistencia asistencia;
     public AsistenciaJSON asistenciaJSON;
     public static ArrayList<Asistencia> asistenciasDeAlumnosFinal = new ArrayList<>();
@@ -46,7 +46,6 @@ public class ValidarActivity extends AppCompatActivity {
     public static ArrayList<AsistenciaJSON> asistenciasJSON = new ArrayList<>();
 
     public String idClase;
-    SwipeRefreshLayout refresh;
 
     Gson gson;
     String asistenciasConvertidas;
@@ -72,24 +71,15 @@ public class ValidarActivity extends AppCompatActivity {
 
         //Atrapo el listview y el texto de hecho
         validar = findViewById(R.id.validarBtn);
-        listView=findViewById(R.id.listaAlumnos);
-        refresh = findViewById(R.id.refrescarAsistencias);
-
-        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                asistenciasDeAlumnosFinal.clear();
-                asistenciasDeAlumnosInicial.clear();
-                recuperarAsistencias(idClase);
-            }
-        });
 
         asistenciasDeAlumnosInicial.clear();
         asistenciasDeAlumnosFinal.clear();
         recuperarAsistencias(idClase);
 
-        adapter = new AdaptadorValidarActivity(asistenciasDeAlumnosFinal,getApplicationContext());
-        listView.setAdapter(adapter);
+        listaDeAsistenciasView=findViewById(R.id.listaDeAsistencia);
+        adaptadorAsistencias = new AdaptadorValidarActivity(getApplicationContext(),asistenciasDeAlumnosFinal);
+        listaDeAsistenciasView.setLayoutManager(new GridLayoutManager(this,1));
+        listaDeAsistenciasView.setAdapter(adaptadorAsistencias);
 
         validar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,14 +110,12 @@ public class ValidarActivity extends AppCompatActivity {
             public void onResponse(String response) {
 
                 recuperarDatos(response);
-                refresh.setRefreshing(false);
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), "Sin conexion", Toast.LENGTH_LONG).show();
-                refresh.setRefreshing(false);
             }
         }
         ) {
@@ -250,7 +238,7 @@ public class ValidarActivity extends AppCompatActivity {
                 }
 
                 //Acá notifico al adaptador de la lista que se cargaron todas las asistencias
-                adapter.notifyDataSetChanged();
+                adaptadorAsistencias.notifyDataSetChanged();
 
 
             } else {

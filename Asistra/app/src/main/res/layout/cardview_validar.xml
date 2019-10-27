@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    android:id="@+id/cardview_validar"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="12dp"
+    cardview:cardCornerRadius="8dp"
+    app:ignore="NamespaceTypo">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintValidar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="nombreAlumno"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="@+id/apellidoAlumnoDeLista"
+            app:layout_constraintTop_toBottomOf="@+id/apellidoAlumnoDeLista"
+            cardview:layout_constraintStart_toStartOf="@+id/apellidoAlumnoDeLista"
+            cardview:layout_constraintTop_toBottomOf="@+id/apellidoAlumnoDeLista" />
+
+        <TextView
+            android:id="@+id/recordar"
+            android:layout_width="196dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="12dp"
+            android:text="RECORDAR ASISTENCIA (NO)"
+            android:textColor="@color/celeste"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nombre" />
+
+        <TextView
+            android:id="@+id/apellidoAlumnoDeLista"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_alignTop="@+id/preau"
+            android:layout_marginStart="7dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="7dp"
+            android:text="apellidoAlumno"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            cardview:layout_constraintStart_toStartOf="parent"
+            cardview:layout_constraintTop_toTopOf="parent" />
+
+        <ToggleButton
+            android:id="@+id/preau"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/shape"
+            android:shadowColor="@android:color/background_dark"
+            android:shadowRadius="0"
+            android:textColor="@android:color/background_light"
+            android:textOff="AUSENTE"
+            android:textOn="PRESENTE"
+            android:theme="@android:style/Animation.Activity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.631"
+            cardview:layout_constraintBottom_toBottomOf="parent"
+            cardview:layout_constraintEnd_toEndOf="parent"
+            cardview:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

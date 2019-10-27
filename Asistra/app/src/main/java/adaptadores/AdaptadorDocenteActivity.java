@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import clases.Cursada;
 import maes.tech.intentanim.CustomIntent;
 
-public class AdaptadorCursadaActivity extends RecyclerView.Adapter<AdaptadorCursadaActivity.MyViewHolder> {
+public class AdaptadorDocenteActivity extends RecyclerView.Adapter<AdaptadorDocenteActivity.MyViewHolder> {
 
     private ArrayList<Cursada> dataSet;
     private Context mContext;
 
-    public AdaptadorCursadaActivity(Context context, ArrayList<Cursada> listas ) {
+    public AdaptadorDocenteActivity(Context context, ArrayList<Cursada> listas ) {
         this.dataSet = listas;
         this.mContext=context;
     }
@@ -81,7 +81,7 @@ public class AdaptadorCursadaActivity extends RecyclerView.Adapter<AdaptadorCurs
 
             txtAsignatura = itemView.findViewById(R.id.asignaturaNombre) ;
             txtComision = itemView.findViewById(R.id.fechaClase) ;
-            cardView = itemView.findViewById(R.id.cardview_id);
+            cardView = itemView.findViewById(R.id.cardview_cursada);
 
         }
     }

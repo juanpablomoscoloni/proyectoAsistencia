@@ -1,125 +1,104 @@
 package adaptadores;
-
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
 import com.example.asistra.R;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
 import clases.Asistencia;
 
-/**
- Created by Starnova on 27/04/2018.
- */
 
-public class AdaptadorValidarActivity extends ArrayAdapter<Asistencia> implements View.OnClickListener{
+public class AdaptadorValidarActivity extends RecyclerView.Adapter<AdaptadorValidarActivity.MyViewHolder> {
 
     private ArrayList<Asistencia> dataSet;
-    Context mContext;
+    private Context mContext;
+
+    public AdaptadorValidarActivity(Context context, ArrayList<Asistencia> asistencias ) {
+        this.dataSet = asistencias;
+        this.mContext = context;
+    }
 
     @Override
-    public void onClick(View view) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-    }
-
-    // View lookup cache
-    private static class ViewHolder {
-        TextView txtNombre;
-        TextView txtApellido;
-        TextView txtLegajo;
-        TextView masOpciones;
-        TextView recordar;
-        ToggleButton preau;
-    }
-
-    public AdaptadorValidarActivity(ArrayList<Asistencia> asistenciasAlumnos, Context context) {
-        super(context, R.layout.fila_asistencia, asistenciasAlumnos);
-        this.dataSet = asistenciasAlumnos;
-        this.mContext=context;
-
+        View view ;
+        LayoutInflater mInflater = LayoutInflater.from(mContext);
+        view = mInflater.inflate(R.layout.cardview_validar,parent,false);
+        return new MyViewHolder(view);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
-        final Asistencia asistenciaDealumno = getItem(position);
-        // Check if an existing view is being reused, otherwise inflate the view
-        final ViewHolder viewHolder; // view lookup cache stored in tag
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        final View result;
+        final Asistencia asistenciaDealumno = dataSet.get(position);
 
-        if (convertView == null) {
+        holder.txtNombre.setText(asistenciaDealumno.getNombreAlumno());
+        holder.txtApellido.setText(asistenciaDealumno.getApellidoAlumno());
 
-            viewHolder = new ViewHolder();
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.fila_asistencia, parent, false);
-            viewHolder.txtNombre = (TextView) convertView.findViewById(R.id.nombre);
-            viewHolder.txtApellido = (TextView) convertView.findViewById(R.id.apellidoAlumnoDeLista);
-            viewHolder.preau = (ToggleButton) convertView.findViewById(R.id.preau);
-            viewHolder.recordar = convertView.findViewById(R.id.recordar);
-
-            result=convertView;
-
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-            result=convertView;
-        }
-
-        /*
-
-         A partir de acá se hacen las modificaciones sino se renuevan los botones
-
-         */
-        final GradientDrawable drawable = (GradientDrawable)viewHolder.preau.getBackground();
+        final GradientDrawable drawable = (GradientDrawable)holder.preau.getBackground();
 
         if (Objects.requireNonNull(asistenciaDealumno).getEstado().equals("1")) {
-            viewHolder.preau.setChecked(true);
+            holder.preau.setChecked(true);
             drawable.setStroke(3, ContextCompat.getColor(mContext, R.color.verde));
         } else {
-            viewHolder.preau.setChecked(false);
+            holder.preau.setChecked(false);
             drawable.setStroke(3, ContextCompat.getColor(mContext, R.color.rojo)); //
         }
 
-
-        viewHolder.txtNombre.setText(asistenciaDealumno.getNombreAlumno());
-        viewHolder.txtApellido.setText(asistenciaDealumno.getApellidoAlumno());
-
         //Si se apreta el botón de la asistencia
-        viewHolder.preau.setOnClickListener(new View.OnClickListener() {
+        holder.preau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (asistenciaDealumno.getEstado() =="1") {
-                     viewHolder.preau.setText("Ausente");
+                    holder.preau.setText("Ausente");
                     asistenciaDealumno.setEstado("0");
                     drawable.setStroke(3, ContextCompat.getColor(mContext, R.color.rojo));
                 } else {
                     drawable.setStroke(3, ContextCompat.getColor(mContext, R.color.verde));
                     asistenciaDealumno.setEstado("1");
-                    viewHolder.preau.setText("Presente");
+                    holder.preau.setText("Presente");
                 }
-
-                 }
+            }
 
 
         });
 
-
-        // Return the completed view to render on screen
-        return convertView;
     }
+
+    @Override
+    public int getItemCount() {
+        return dataSet.size();
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+
+        TextView txtNombre;
+        TextView txtApellido;
+        ToggleButton preau;
+        CardView cardview_validar;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+
+            txtNombre = itemView.findViewById(R.id.nombre);
+            txtApellido = itemView.findViewById(R.id.apellidoAlumnoDeLista);
+            preau = itemView.findViewById(R.id.preau);
+            cardview_validar = itemView.findViewById(R.id.cardview_validar);
+
+        }
+    }
+
+
 }
