@@ -111,28 +111,9 @@ public class DocenteActivity extends AppCompatActivity {
 
 
         listasDeCursadaView = findViewById(R.id.listaDeAsistencia);
-        adaptadorMaterias = new ListaCursadas(getApplicationContext(),listaDeCursadas);
+        adaptadorMaterias = new ListaCursadas(this,listaDeCursadas);
         listasDeCursadaView.setLayoutManager(new GridLayoutManager(this,1));
-
         listasDeCursadaView.setAdapter(adaptadorMaterias);
-        /*
-        //Inicializo el visualizador de la lista de asistencias en pantalla
-        listasDeCursadaView = findViewById(R.id.listaDeAsistencia);
-        listaDeCursadas.clear();
-        //Inicializo al adaptador
-        adaptadorMaterias = new ListaCursadas(listaDeCursadas, getApplicationContext());
-        //Setteo el adapter en la listView
-        listasDeCursadaView.setAdapter(adaptadorMaterias);
-
-        listasDeCursadaView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                pasarDeActividad(i);
-
-            }
-        });
-        */
 
         recuperarDocente();
 
@@ -299,24 +280,7 @@ public class DocenteActivity extends AppCompatActivity {
 
     }
 
-    public void pasarDeActividad (int i) {
 
-        Intent intent = new Intent(DocenteActivity.this, CursadaActivity.class);
-        intent.putExtra("idCursada",String.valueOf(listaDeCursadas.get(i).getId()));
-        intent.putExtra("asignatura",listaDeCursadas.get(i).getAsignatura().getNombre());
-        intent.putExtra("idDocente",listaDeCursadas.get(i).getDocente().getId());
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        CustomIntent.customType(DocenteActivity.this,"left-to-right");
-
-        /* Tipos de animaciones
-         * *left-to-right
-         *right-to-left
-         *bottom-to-up
-         *up-to-bottom
-         *fadein-to-fadeout
-         *rotateout-to-rotatein*/
-    }
 
 
 }
