@@ -12,7 +12,7 @@
         android:id="@+id/validarBtn"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="0dp"
-        android:layout_height="118dp"
+        android:layout_height="105dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/holo_blue_dark"
         android:text="VALIDAR"

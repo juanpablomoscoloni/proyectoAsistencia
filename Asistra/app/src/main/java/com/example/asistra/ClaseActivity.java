@@ -228,7 +228,7 @@ public class ClaseActivity extends AppCompatActivity {
 
 
             } else {
-                Toast.makeText(getApplicationContext(), "No se encontró", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Esta cursada no tiene alumnos", Toast.LENGTH_LONG).show();
             }
 
 

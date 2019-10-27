@@ -108,17 +108,16 @@
     <Button
         android:id="@+id/iniciar"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="617dp"
-        android:layout_height="126dp"
+        android:layout_width="0dp"
+        android:layout_height="105dp"
         android:layout_marginTop="8dp"
         android:background="#4799E8"
         android:text="INICIAR SESIÓN"
         android:textColor="@android:color/background_light"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/logo"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="@+id/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:layout_constraintVertical_bias="1.0" />
 

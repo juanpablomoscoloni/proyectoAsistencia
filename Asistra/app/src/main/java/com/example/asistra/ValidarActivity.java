@@ -1,14 +1,12 @@
 package com.example.asistra;
 
 import android.annotation.SuppressLint;
-import android.content.ClipData;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -31,7 +29,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import adaptadores.ListaAsistencia;
+import adaptadores.AdaptadorValidarActivity;
 import clases.Alumno;
 import clases.Asistencia;
 import clases.AsistenciaJSON;
@@ -40,7 +38,7 @@ import clases.Inscripcion;
 public class ValidarActivity extends AppCompatActivity {
 
     public static ListView listView;
-    public static ListaAsistencia adapter;
+    public static AdaptadorValidarActivity adapter;
     public Asistencia asistencia;
     public AsistenciaJSON asistenciaJSON;
     public static ArrayList<Asistencia> asistenciasDeAlumnosFinal = new ArrayList<>();
@@ -90,7 +88,7 @@ public class ValidarActivity extends AppCompatActivity {
         asistenciasDeAlumnosFinal.clear();
         recuperarAsistencias(idClase);
 
-        adapter = new ListaAsistencia(asistenciasDeAlumnosFinal,getApplicationContext());
+        adapter = new AdaptadorValidarActivity(asistenciasDeAlumnosFinal,getApplicationContext());
         listView.setAdapter(adapter);
 
         validar.setOnClickListener(new View.OnClickListener() {

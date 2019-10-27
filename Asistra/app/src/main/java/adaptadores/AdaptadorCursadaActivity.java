@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import clases.Cursada;
 import maes.tech.intentanim.CustomIntent;
 
-public class ListaCursadas extends RecyclerView.Adapter<ListaCursadas.MyViewHolder> {
+public class AdaptadorCursadaActivity extends RecyclerView.Adapter<AdaptadorCursadaActivity.MyViewHolder> {
 
     private ArrayList<Cursada> dataSet;
     private Context mContext;
 
-    public ListaCursadas (Context context, ArrayList<Cursada> listas ) {
+    public AdaptadorCursadaActivity(Context context, ArrayList<Cursada> listas ) {
         this.dataSet = listas;
         this.mContext=context;
     }

@@ -1,8 +1,6 @@
 package com.example.asistra;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +8,9 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -24,8 +19,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,12 +30,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
-import adaptadores.ListaCursadas;
+import adaptadores.AdaptadorCursadaActivity;
 import clases.Asignatura;
 import clases.Comision;
 import clases.Cursada;
 import clases.Docente;
-import maes.tech.intentanim.CustomIntent;
 
 
 public class DocenteActivity extends AppCompatActivity {
@@ -62,7 +54,7 @@ public class DocenteActivity extends AppCompatActivity {
 
     //Lo necesario para mostrar las cursadas en pantalla
     public static RecyclerView listasDeCursadaView;
-    public static ListaCursadas adaptadorMaterias;
+    public static AdaptadorCursadaActivity adaptadorMaterias;
 
     ProgressBar progreso;
     TextView tituloDocente;
@@ -111,7 +103,7 @@ public class DocenteActivity extends AppCompatActivity {
 
 
         listasDeCursadaView = findViewById(R.id.listaDeAsistencia);
-        adaptadorMaterias = new ListaCursadas(this,listaDeCursadas);
+        adaptadorMaterias = new AdaptadorCursadaActivity(this,listaDeCursadas);
         listasDeCursadaView.setLayoutManager(new GridLayoutManager(this,1));
         listasDeCursadaView.setAdapter(adaptadorMaterias);
 

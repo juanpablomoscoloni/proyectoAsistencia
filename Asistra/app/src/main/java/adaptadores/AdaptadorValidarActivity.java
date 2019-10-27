@@ -24,7 +24,7 @@ import clases.Asistencia;
  Created by Starnova on 27/04/2018.
  */
 
-public class ListaAsistencia extends ArrayAdapter<Asistencia> implements View.OnClickListener{
+public class AdaptadorValidarActivity extends ArrayAdapter<Asistencia> implements View.OnClickListener{
 
     private ArrayList<Asistencia> dataSet;
     Context mContext;
@@ -44,7 +44,7 @@ public class ListaAsistencia extends ArrayAdapter<Asistencia> implements View.On
         ToggleButton preau;
     }
 
-    public ListaAsistencia(ArrayList<Asistencia> asistenciasAlumnos, Context context) {
+    public AdaptadorValidarActivity(ArrayList<Asistencia> asistenciasAlumnos, Context context) {
         super(context, R.layout.fila_asistencia, asistenciasAlumnos);
         this.dataSet = asistenciasAlumnos;
         this.mContext=context;
