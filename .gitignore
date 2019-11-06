@@ -1,0 +1,4 @@
+#Don't tranck content of these folders
+node_modules
+.vscode
+
